@@ -170,7 +170,11 @@ function attachModuleSymbols(doclets, modules) {
     return modules.map(function(module) {
         if (symbols[module.longname]) {
             module.module = symbols[module.longname];
-            module.module.name = module.module.name.replace('module:', 'require("') + '")';
+
+            var name = module.module.name.replace(/^module:/, ""),
+                index = name.lastIndexOf("/");
+            module.module.name = name.substr(index >= 0 ? (index + 1) : 0);
+            module.module.amdSyntax = "require([\"" + name + "\"], function (" + module.module.name + ") { $1; })";
         }
     });
 }
