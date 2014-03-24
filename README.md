@@ -15,6 +15,12 @@ Then you can use the template by:
 $ jsdoc mycode.js -t /path/to/jsdoc-amddcl-template/templates/amddcl
 ```
 
+## List of changes on top of the original
+
+* Fix to an issue of duplicate doc of a method.
+  It happens if a method is defined in more than one parent classes, but not in child class.
+* Show modules in AMD format instead of CommonJS format.
+
 ## Licensing
 
 This project is distributed by the Dojo Foundation and licensed under the ["New" BSD License](./LICENSE).
