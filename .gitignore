@@ -1,3 +1,4 @@
 .project
-sampleproject/out
+node_modules
+out
 templates/amddcl/static/scripts/prettify

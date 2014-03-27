@@ -8,11 +8,25 @@ First you need to:
 
 1. Create a directory, /path/to/jsdoc-amddcl-template/templates/amddcl/static/scripts/prettify
 2. Download [prettify](https://code.google.com/p/google-code-prettify/) and place prettify.js as well as lang-css.js under /path/to/jsdoc-amddcl-template/templates/amddcl/static/scripts/prettify
+3. Make sure your project has package.json, so that JSDoc can understand the name of your project
 
 Then you can use the template by:
 
 ```sh
-$ jsdoc mycode.js -t /path/to/jsdoc-amddcl-template/templates/amddcl
+$ cd /path/to/jsdoc-amddcl-template
+$ jsdoc -c ./conf.json /path/to/your/project /path/to/your/project/README.md /path/to/your/project/package.json
+```
+
+The [conf.json](https://github.com/asudoh/jsdoc-amddcl-template/blob/master/conf.json) file contains the pointer to our template, as well as the typical usage pattern using our template. You can optionally directly specify our template via JSDoc's `-t` option.
+
+## Importing doclets from other projects
+
+First you export doclets of the dependant projects by JSDoc's `-X` option:
+
+```sh
+$ cd /path/to/jsdoc-amddcl-template
+$ mkdir out
+$ jsdoc -X -c ./conf.json /path/to/dependant/project /path/to/dependant/project/package.json >! out/doclets.json
 ```
 
 ## List of changes on top of the original
@@ -20,7 +34,8 @@ $ jsdoc mycode.js -t /path/to/jsdoc-amddcl-template/templates/amddcl
 * Fix to an issue of duplicate doc of a method.
   It happens if a method is defined in more than one parent classes, but not in child class.
 * Show modules in AMD format instead of CommonJS format.
-* Makes sure inheritance chain is shown for modules exporting what `dcl()`[http://www.dcljs.org/] returns.
+* Makes sure inheritance chain is shown for modules exporting what [`dcl()`](http://www.dcljs.org/) returns.
+* Allows you to import doclets from other projects (see above section).
 
 ## Licensing
 

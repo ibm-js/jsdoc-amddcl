@@ -3,11 +3,11 @@
     docs.forEach(function(doc, i) {
 ?>
 
-<?js if (doc.kind === 'mainpage' || (doc.kind === 'package')) { ?>
+<?js if (doc.kind === 'mainpage' || (doc.kind === 'package' && !doc.imported)) { ?>
     <?js= self.partial('mainpage.tmpl', doc) ?>
 <?js } else if (doc.kind === 'source') { ?>
     <?js= self.partial('source.tmpl', doc) ?>
-<?js } else { ?>
+<?js } else if (doc.kind !== 'package') { ?>
 
 <section>
 

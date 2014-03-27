@@ -1,0 +1,15 @@
+{
+	"name": "sampleframework",
+	"version": "0.1.0-dev",
+	"dependencies": {
+	},
+	"devDependencies": {
+	},
+	"licenses": [
+		{
+			"type": "BSD",
+			"url": "https://github.com/asudoh/jsdoc-amddcl-template/blob/master/LICENSE"
+		}
+	],
+	"bugs": "https://github.com/asudoh/jsdoc-amddcl-template/issues"
+}

@@ -1,0 +1,20 @@
+{
+    "opts": {
+        "template": "templates/amddcl",
+        "encoding": "utf8",
+        "recurse": true
+    },
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "source": {
+        "includePattern": ".+\\.js(doc)?$"
+    },
+    "plugins": [
+        "plugins/markdown",
+        "custom-plugins/importer"
+    ],
+    "markdown": {
+        "parser": "gfm"
+    }
+}

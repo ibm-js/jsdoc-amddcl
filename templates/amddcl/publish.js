@@ -202,7 +202,7 @@ function buildNav(members) {
     if (members.modules.length) {
         nav += '<h3>Modules</h3><ul>';
         members.modules.forEach(function(m) {
-            if ( !hasOwnProp.call(seen, m.longname) ) {
+            if ( !hasOwnProp.call(seen, m.longname) && !m.imported ) {
                 nav += '<li>'+linkto(m.longname, m.name)+'</li>';
             }
             seen[m.longname] = true;
@@ -225,7 +225,7 @@ function buildNav(members) {
 
     if (members.classes.length) {
         members.classes.forEach(function(c) {
-            if ( !hasOwnProp.call(seen, c.longname) ) {
+            if ( !hasOwnProp.call(seen, c.longname) && !c.imported ) {
                 classNav += '<li>'+linkto(c.longname, c.name)+'</li>';
             }
             seen[c.longname] = true;
@@ -241,7 +241,7 @@ function buildNav(members) {
     if (members.events.length) {
         nav += '<h3>Events</h3><ul>';
         members.events.forEach(function(e) {
-            if ( !hasOwnProp.call(seen, e.longname) ) {
+            if ( !hasOwnProp.call(seen, e.longname) && !e.imported ) {
                 nav += '<li>'+linkto(e.longname, e.name)+'</li>';
             }
             seen[e.longname] = true;
@@ -253,7 +253,7 @@ function buildNav(members) {
     if (members.namespaces.length) {
         nav += '<h3>Namespaces</h3><ul>';
         members.namespaces.forEach(function(n) {
-            if ( !hasOwnProp.call(seen, n.longname) ) {
+            if ( !hasOwnProp.call(seen, n.longname) && !n.imported ) {
                 nav += '<li>'+linkto(n.longname, n.name)+'</li>';
             }
             seen[n.longname] = true;
@@ -265,7 +265,7 @@ function buildNav(members) {
     if (members.mixins.length) {
         nav += '<h3>Mixins</h3><ul>';
         members.mixins.forEach(function(m) {
-            if ( !hasOwnProp.call(seen, m.longname) ) {
+            if ( !hasOwnProp.call(seen, m.longname) && !m.imported ) {
                 nav += '<li>'+linkto(m.longname, m.name)+'</li>';
             }
             seen[m.longname] = true;
@@ -277,7 +277,9 @@ function buildNav(members) {
     if (members.tutorials.length) {
         nav += '<h3>Tutorials</h3><ul>';
         members.tutorials.forEach(function(t) {
-            nav += '<li>'+tutoriallink(t.name)+'</li>';
+            if ( !t.imported ) {
+                nav += '<li>'+tutoriallink(t.name)+'</li>';
+            }
         });
 
         nav += '</ul>';
@@ -285,7 +287,7 @@ function buildNav(members) {
 
     if (members.globals.length) {
         members.globals.forEach(function(g) {
-            if ( g.kind !== 'typedef' && !hasOwnProp.call(seen, g.longname) ) {
+            if ( g.kind !== 'typedef' && !hasOwnProp.call(seen, g.longname) && !g.imported ) {
                 globalNav += '<li>' + linkto(g.longname, g.name) + '</li>';
             }
             seen[g.longname] = true;
@@ -350,7 +352,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     var sourceFiles = {};
     var sourceFilePaths = [];
     data().each(function(doclet) {
-         doclet.attribs = '';
+        doclet.attribs = '';
 
         if (doclet.examples) {
             doclet.examples = doclet.examples.map(function(example) {
