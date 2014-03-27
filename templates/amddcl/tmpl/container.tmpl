@@ -46,10 +46,11 @@
     <?js } ?>
     </div>
 
-    <?js if (doc.augments && doc.augments.length) { ?>
+    <?js var augments = ((doc.module || {}).augments || []).length ? doc.module.augments : doc.augments ?>
+    <?js if (augments && augments.length) { ?>
         <h3 class="subsection-title">Extends</h3>
 
-        <ul><?js doc.augments.forEach(function(a) { ?>
+        <ul><?js augments.forEach(function(a) { ?>
             <li><?js= self.linkto(a, a) ?></li>
         <?js }); ?></ul>
     <?js } ?>

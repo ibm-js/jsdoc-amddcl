@@ -20,6 +20,7 @@ $ jsdoc mycode.js -t /path/to/jsdoc-amddcl-template/templates/amddcl
 * Fix to an issue of duplicate doc of a method.
   It happens if a method is defined in more than one parent classes, but not in child class.
 * Show modules in AMD format instead of CommonJS format.
+* Makes sure inheritance chain is shown for modules exporting what `dcl()`[http://www.dcljs.org/] returns.
 
 ## Licensing
 
