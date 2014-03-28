@@ -12,6 +12,7 @@
     },
     "plugins": [
         "plugins/markdown",
+        "custom-plugins/dedupe",
         "custom-plugins/importer"
     ],
     "markdown": {

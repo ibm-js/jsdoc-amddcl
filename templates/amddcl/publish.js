@@ -311,16 +311,7 @@ function buildNav(members) {
     @param {Tutorial} tutorials
  */
 exports.publish = function(taffyData, opts, tutorials) {
-    var table = {};
-    data = taffy(taffyData().get().reduceRight(function (data, entry) {
-        if (!entry.memberof) {
-            data.unshift(entry);
-        } else if (!table[entry.longname]) {
-            table[entry.longname] = 1;
-            data.unshift(entry);
-        }
-        return data;
-    }, []));
+    data = taffyData;
 
     var conf = env.conf.templates || {};
     conf['default'] = conf['default'] || {};
