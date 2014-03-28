@@ -1,33 +1,35 @@
-# jsdoc-amddcl-template
+# jsdoc-amddcl
 
-This repositry contains an effort to create a JSDoc template that works well with [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) and C3MRO-based multiple class inheritance.
+This repositry contains an effort to create a JSDoc template and plugins that work well with [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) and C3MRO-based multiple class inheritance.
 
 ## Setup
 
 First you need to:
 
-1. Create a directory, /path/to/jsdoc-amddcl-template/templates/amddcl/static/scripts/prettify
-2. Download [prettify](https://code.google.com/p/google-code-prettify/) and place prettify.js as well as lang-css.js under /path/to/jsdoc-amddcl-template/templates/amddcl/static/scripts/prettify
+1. Create a directory, /path/to/jsdoc-amddcl/templates/amddcl/static/scripts/prettify
+2. Download [prettify](https://code.google.com/p/google-code-prettify/) and place prettify.js as well as lang-css.js under /path/to/jsdoc-amddcl/templates/amddcl/static/scripts/prettify
 3. Make sure your project has package.json, so that JSDoc can understand the name of your project
 
-Then you can use the template by:
+Then you can use the template/plugins by:
 
 ```sh
-$ cd /path/to/jsdoc-amddcl-template
+$ cd /path/to/jsdoc-amddcl
 $ jsdoc -c ./conf.json /path/to/your/project /path/to/your/project/README.md /path/to/your/project/package.json
 ```
 
-The [conf.json](https://github.com/asudoh/jsdoc-amddcl-template/blob/master/conf.json) file contains the pointer to our template, as well as the typical usage pattern using our template. You can optionally directly specify our template via JSDoc's `-t` option.
+The [conf.json](https://github.com/asudoh/jsdoc-amddcl/blob/master/conf.json) file contains the pointer to our template/plugins, as well as the typical usage pattern using our template/plugins.
 
 ## Importing doclets from other projects
 
 First you export doclets of the dependant projects by JSDoc's `-X` option:
 
 ```sh
-$ cd /path/to/jsdoc-amddcl-template
+$ cd /path/to/jsdoc-amddcl
 $ mkdir out
 $ jsdoc -X -c ./conf.json /path/to/dependant/project /path/to/dependant/project/package.json >! out/doclets.json
 ```
+
+All doclets.json files under JSDoc output directory is searched by [our plugin to import doclets](https://github.com/asudoh/jsdoc-amddcl/blob/master/custom-plugins/importer.js).
 
 ## List of changes on top of the original
 

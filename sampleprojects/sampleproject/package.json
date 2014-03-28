@@ -9,8 +9,8 @@
 	"licenses": [
 		{
 			"type": "BSD",
-			"url": "https://github.com/asudoh/jsdoc-amddcl-template/blob/master/LICENSE"
+			"url": "https://github.com/asudoh/jsdoc-amddcl/blob/master/LICENSE"
 		}
 	],
-	"bugs": "https://github.com/asudoh/jsdoc-amddcl-template/issues"
+	"bugs": "https://github.com/asudoh/jsdoc-amddcl/issues"
 }
