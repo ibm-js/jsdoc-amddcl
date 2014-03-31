@@ -27,10 +27,13 @@ exports.handlers = {
     parseComplete: function(e) {
         (process.env.JSDOC_IMPORT_ROOTS ? process.env.JSDOC_IMPORT_ROOTS.split(path.delimiter) : [env.opts.destination]).forEach(function (root) {
             findImports(root).forEach(function (file) {
-                JSON.parse(fs.readFileSync(file, 'utf8')).map(function (doclet) {
-                    doclet.imported = true;
-                    e.doclets.push(doclet);
-                });
+                var json = fs.readFileSync(file, 'utf8');
+                if (json) {
+                    JSON.parse(json).map(function (doclet) {
+                        doclet.imported = true;
+                        e.doclets.push(doclet);
+                    });
+                }
             });
         });
     }
