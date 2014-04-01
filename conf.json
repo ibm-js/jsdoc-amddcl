@@ -1,8 +1,7 @@
 {
     "opts": {
         "template": "templates/amddcl",
-        "encoding": "utf8",
-        "recurse": true
+        "encoding": "utf8"
     },
     "tags": {
         "allowUnknownTags": true
