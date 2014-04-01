@@ -14,7 +14,7 @@ Then you can use the template/plugins by:
 
 ```sh
 $ cd /path/to/jsdoc-amddcl
-$ jsdoc -c ./conf.json /path/to/your/project /path/to/your/project/README.md /path/to/your/project/package.json
+$ jsdoc -c ./conf.json /path/to/yourproject /path/to/yourproject/README.md /path/to/yourproject/package.json
 ```
 
 The [conf.json](https://github.com/asudoh/jsdoc-amddcl/blob/master/conf.json) file contains the pointer to our template/plugins, as well as the typical usage pattern using our template/plugins.
@@ -32,8 +32,8 @@ First you export doclets of the dependant projects by JSDoc's `-X` option:
 
 ```sh
 $ cd /path/to/jsdoc-amddcl
-$ mkdir out
-$ jsdoc -X -c ./conf.json /path/to/dependant/project /path/to/dependant/project/package.json >! out/doclets.json
+$ mkdir out/dependantproject
+$ jsdoc -X -c ./conf.json /path/to/dependantproject /path/to/dependantproject/package.json >! out/dependantproject/doclets.json
 ```
 
 All doclets.json files under JSDoc output directory is searched by [our plugin to import doclets](https://github.com/asudoh/jsdoc-amddcl/blob/master/custom-plugins/importer.js).
@@ -42,8 +42,8 @@ You can try a sample project in this repo:
 
 ```sh
 $ cd /path/to/jsdoc-amddcl
-$ mkdir out
-$ jsdoc -X -c ./conf.json ./sampleprojects/sampleframework ./sampleprojects/sampleframework/package.json > out/doclets.json
+$ mkdir out/sampleframework
+$ jsdoc -X -c ./conf.json ./sampleprojects/sampleframework ./sampleprojects/sampleframework/package.json > out/sampleframework/doclets.json
 ```
 
 ## List of changes on top of the original
