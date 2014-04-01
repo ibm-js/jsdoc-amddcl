@@ -8,7 +8,8 @@
         "allowUnknownTags": true
     },
     "source": {
-        "includePattern": ".+\\.js(doc)?$"
+        "includePattern": ".+\\.js(doc)?$",
+        "excludePattern": "(^|\\/|\\\\)(demos|node_modules|out|samples|tests)($|\\/|\\\\)"
     },
     "plugins": [
         "plugins/markdown",
