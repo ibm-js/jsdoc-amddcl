@@ -1,0 +1,21 @@
+{
+	"name": "jsdoc-amddcl",
+	"version": "0.1.0-dev",
+	"dependencies": {
+	},
+	"devDependencies": {
+		"grunt": "~0.4.0",
+		"jsdoc": "~3.3.0"
+	},
+	"licenses": [
+		{
+			"type": "BSD",
+			"url": "https://github.com/asudoh/jsdoc-amddcl/blob/master/LICENSE"
+		},
+		{
+			"type": "Apache",
+			"url": "https://github.com/asudoh/jsdoc-amddcl/blob/master/LICENSE-jsdoc.md"
+		}
+	],
+	"bugs": "https://github.com/asudoh/jsdoc-amddcl/issues"
+}
