@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
 	grunt.loadTasks("tasks");
 	grunt.initConfig({
-		jsdoc: {
+		"jsdoc-amddcl": {
 			"sampleframework": {
 				files: [
 					{
@@ -41,6 +41,9 @@ module.exports = function (grunt) {
 							"./sampleprojects/sampleproject",
 							"./sampleprojects/sampleproject/README.md",
 							"./sampleprojects/sampleproject/package.json"
+						],
+						imports: [
+							"./out/sampleframework"
 						]
 					}
 				]

@@ -68,15 +68,23 @@ module.exports = function (grunt) {
 		return process;
 	}
 
-	grunt.registerMultiTask("jsdoc", "Run JSDoc", function () {
+	grunt.registerMultiTask("jsdoc-amddcl", "Run JSDoc", function () {
 		var done = this.async();
 		this.files.forEach(function (file) {
 			file.dest && grunt.file.mkdir(path.dirname(file.dest));
 		});
 		grunt.util.async.forEach(this.files, function (file, callback) {
-			run("node_modules/.bin/jsdoc", (file.args || []).concat(file.src), {
-				redirout: file.dest
-			}, callback, callback);
+			if (file.imports) {
+				process.env.JSDOC_IMPORT_ROOTS = file.imports.join(path.delimiter);
+			}
+			var args = [path.resolve(path.dirname(module.filename), "../node_modules/jsdoc/jsdoc.js")];
+			file.args && args.push.apply(args, file.args);
+			args.push.apply(args, file.src);
+			function finished() {
+				delete process.env.JSDOC_IMPORT_ROOTS;
+				callback.apply(this, arguments);
+			}
+			run("node", args, {redirout: file.dest}, finished, finished);
 		}, done);
 	});
 };

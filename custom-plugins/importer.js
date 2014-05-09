@@ -5,7 +5,7 @@ var env = global.env,
     path = require('path');
 
 function findImports(dir) {
-    return !dir.trim() || dir === env.pwd ? [] :
+    return dir === env.pwd || !fs.existsSync(dir) ? [] :
         fs.readdirSync(dir).reduce(function (list, entry) {
             var stat,
                 entryPath = path.join(dir, entry);
