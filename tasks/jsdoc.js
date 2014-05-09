@@ -13,10 +13,14 @@ module.exports = function (grunt) {
 			if (file.imports) {
 				process.env.JSDOC_IMPORT_ROOTS = file.imports.join(path.delimiter);
 			}
-			var args = [path.resolve(path.dirname(module.filename), "../node_modules/jsdoc/jsdoc.js")];
-			file.args && args.push.apply(args, file.args);
-			args.push.apply(args, file.src);
-			var command = ["node"].concat(args).concat(file.dest ? ["> " + file.dest] : []).join(" ");
+			var args = [JSON.stringify(path.resolve(path.dirname(module.filename), "../node_modules/jsdoc/jsdoc.js"))];
+			file.args && args.push.apply(args, file.args.map(function (arg) {
+				return JSON.stringify(arg);
+			}));
+			args.push.apply(args, file.src.map(function (file) {
+				return JSON.stringify(file);
+			}));
+			var command = ["node"].concat(args).concat(file.dest ? ["> " + JSON.stringify(file.dest)] : []).join(" ");
 			grunt.log.writeln(command);
 			exec(command, function (err, stdout, stderr) {
 				stdout && grunt.log.writeln(stdout);
