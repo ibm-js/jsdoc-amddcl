@@ -10,12 +10,12 @@
 	"licenses": [
 		{
 			"type": "BSD",
-			"url": "https://github.com/asudoh/jsdoc-amddcl/blob/master/LICENSE"
+			"url": "https://github.com/ibm-js/jsdoc-amddcl/blob/master/LICENSE"
 		},
 		{
 			"type": "Apache",
-			"url": "https://github.com/asudoh/jsdoc-amddcl/blob/master/LICENSE-jsdoc.md"
+			"url": "https://github.com/ibm-js/jsdoc-amddcl/blob/master/LICENSE-jsdoc.md"
 		}
 	],
-	"bugs": "https://github.com/asudoh/jsdoc-amddcl/issues"
+	"bugs": "https://github.com/ibm-js/jsdoc-amddcl/issues"
 }

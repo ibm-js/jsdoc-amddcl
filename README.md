@@ -17,7 +17,7 @@ $ cd /path/to/jsdoc-amddcl
 $ jsdoc -c ./conf.json /path/to/yourproject /path/to/yourproject/README.md /path/to/yourproject/package.json
 ```
 
-The [conf.json](https://github.com/asudoh/jsdoc-amddcl/blob/master/conf.json) file contains the pointer to our template/plugins, as well as the typical usage pattern using our template/plugins.
+The [conf.json](https://github.com/ibm-js/jsdoc-amddcl/blob/master/conf.json) file contains the pointer to our template/plugins, as well as the typical usage pattern using our template/plugins.
 
 You can try a sample project in this repo:
 
@@ -36,7 +36,7 @@ $ mkdir out/dependantproject
 $ jsdoc -X -c ./conf.json /path/to/dependantproject /path/to/dependantproject/package.json >! out/dependantproject/doclets.json
 ```
 
-All doclets.json files under JSDoc output directory is searched by [our plugin to import doclets](https://github.com/asudoh/jsdoc-amddcl/blob/master/custom-plugins/importer.js).
+All doclets.json files under JSDoc output directory is searched by [our plugin to import doclets](https://github.com/ibm-js/jsdoc-amddcl/blob/master/custom-plugins/importer.js).
 
 You can try a sample project in this repo:
 
