@@ -174,7 +174,7 @@ function attachModuleSymbols(doclets, modules) {
             var name = module.module.name.replace(/^module:/, ''),
                 index = name.lastIndexOf('/');
             module.module.name = name.substr(index >= 0 ? (index + 1) : 0);
-            module.module.amdSyntax = 'require(["' + name + '], function (' +
+            module.module.amdSyntax = 'require(["' + name + '"], function (' +
                 module.module.name + ') { <br/>&nbsp;&nbsp;$1;<br/> });';
         }
     });
