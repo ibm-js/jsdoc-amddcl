@@ -13,7 +13,11 @@ module.exports = function (grunt) {
 			if (file.imports) {
 				process.env.JSDOC_IMPORT_ROOTS = file.imports.join(path.delimiter);
 			}
-			var args = [JSON.stringify(path.resolve(path.dirname(module.filename), "../node_modules/jsdoc/jsdoc.js"))];
+			var args = [
+				JSON.stringify(path.resolve(path.dirname(module.filename), "../node_modules/jsdoc/jsdoc.js")),
+				"-c",
+				"./node_modules/jsdoc-amddcl/conf.json"
+			];
 			file.args && args.push.apply(args, file.args.map(function (arg) {
 				return JSON.stringify(arg);
 			}));
