@@ -27,6 +27,18 @@ define(["dcl/dcl"], function (dcl) {
 			console.log("module:sampleframework/Base0#methodOfBase0 called.");
 		}
 	});
+	
+	/**
+	 * Description of a static method.
+	 * @function aStaticMethod
+	 * @memberOf module:sampleframework/Base0
+	 * @param {string} a Description of the parameter a.
+	 * @param {string} b Description of the parameter b.
+	 * @returns {string} Description of the return type.
+	 */
+	Base0.aStaticMethod = function (a, b) {
+		return a + b;
+	};
 
 	// Doing return dcl() prevents JSDoc from generating doclets for prototype methods/properties
 	return Base0;
