@@ -224,7 +224,9 @@ function buildNav(members) {
         nav += '</ul>';
     }
 
-    if (members.classes.length) {
+    if (members.classes.filter(function(c) {
+        return !hasOwnProp.call(seen, c.longname) && !c.imported;
+    }).length) {
         members.classes.forEach(function(c) {
             if ( !hasOwnProp.call(seen, c.longname) && !c.imported ) {
                 classNav += '<li>'+linkto(c.longname, c.name)+'</li>';
@@ -239,7 +241,9 @@ function buildNav(members) {
         }
     }
 
-    if (members.events.length) {
+    if (members.events.filter(function(e) {
+        return !hasOwnProp.call(seen, e.longname) && !e.imported;
+    }).length) {
         nav += '<h3>Events</h3><ul>';
         members.events.forEach(function(e) {
             if ( !hasOwnProp.call(seen, e.longname) && !e.imported ) {
@@ -251,7 +255,9 @@ function buildNav(members) {
         nav += '</ul>';
     }
 
-    if (members.namespaces.length) {
+    if (members.namespaces.filter(function(n) {
+        return !hasOwnProp.call(seen, n.longname) && !n.imported;
+    }).length) {
         nav += '<h3>Namespaces</h3><ul>';
         members.namespaces.forEach(function(n) {
             if ( !hasOwnProp.call(seen, n.longname) && !n.imported ) {
@@ -263,7 +269,9 @@ function buildNav(members) {
         nav += '</ul>';
     }
 
-    if (members.mixins.length) {
+    if (members.mixins.filter(function(m) {
+        return !hasOwnProp.call(seen, m.longname) && !m.imported;
+    }).length) {
         nav += '<h3>Mixins</h3><ul>';
         members.mixins.forEach(function(m) {
             if ( !hasOwnProp.call(seen, m.longname) && !m.imported ) {
@@ -275,7 +283,9 @@ function buildNav(members) {
         nav += '</ul>';
     }
 
-    if (members.tutorials.length) {
+    if (members.tutorials.filter(function(t) {
+        return !t.imported;
+    }).length) {
         nav += '<h3>Tutorials</h3><ul>';
         members.tutorials.forEach(function(t) {
             if ( !t.imported ) {
@@ -286,7 +296,9 @@ function buildNav(members) {
         nav += '</ul>';
     }
 
-    if (members.globals.length) {
+    if (members.globals.filter(function(g) {
+        return g.kind !== 'typedef' && !hasOwnProp.call(seen, g.longname) && !g.imported;
+    }).length) {
         members.globals.forEach(function(g) {
             if ( g.kind !== 'typedef' && !hasOwnProp.call(seen, g.longname) && !g.imported ) {
                 globalNav += '<li>' + linkto(g.longname, g.name) + '</li>';
