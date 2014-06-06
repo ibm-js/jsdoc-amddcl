@@ -12,6 +12,7 @@
     },
     "plugins": [
         "plugins/markdown",
+        "custom-plugins/private",
         "custom-plugins/dedupe",
         "custom-plugins/prepareExport",
         "custom-plugins/importer"

@@ -14,6 +14,19 @@ define(["dcl/dcl"], function (dcl) {
 		}),
 
 		/**
+		 * Description for {@link module:sampleframework/Base0#_protectedProp sampleframework/Base0#_protectedProp}.
+		 * @type {Number}
+		 * @protected
+		 */
+		_protectedProp: 0,
+
+		/**
+		 * Description for {@link module:sampleframework/Base0#_privateProp sampleframework/Base0#_privateProp}.
+		 * @type {Number}
+		 */
+		_privateProp: 0,
+
+		/**
 		 * Description for {@link module:sampleframework/Base0#methodOfBaseCommon sampleframework/Base0#methodOfBaseCommon}.
 		 */
 		methodOfBaseCommon: function () {
