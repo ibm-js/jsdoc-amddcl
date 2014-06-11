@@ -11,7 +11,7 @@ define([
 	 * @augments {module:sampleframework/Base0}
 	 * @augments {module:sampleframework/Base1}
 	 */
-	var MixinInheritingImported = dcl([Base0, Base1], /** @lends module:sampleproject/MixinInheritingImported# */ {
+	return dcl([Base0, Base1], /** @lends module:sampleproject/MixinInheritingImported# */ {
 		/**
 		 * Description
 		 * for {@link module:sampleproject/MixinInheritingImported#createdCallback sampleproject/MixinInheritingImported#createdCallback}.
@@ -21,7 +21,4 @@ define([
 			console.log("module:sampleproject/MixinInheritingImported#createdCallback called.");
 		})
 	});
-
-	// Doing return dcl() prevents JSDoc from generating doclets for prototype methods/properties
-	return MixinInheritingImported;
 });

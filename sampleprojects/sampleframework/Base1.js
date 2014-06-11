@@ -4,7 +4,7 @@ define(["dcl/dcl"], function (dcl) {
 	 * Another sample base widget class.
 	 * @class module:sampleframework/Base1
 	 */
-	var Base1 = dcl(null, /** @lends module:sampleframework/Base1# */ {
+	return dcl(null, /** @lends module:sampleframework/Base1# */ {
 		/**
 		 * Description for {@link module:sampleframework/Base1#createdCallback sampleframework/Base1#createdCallback}.
 		 * @method
@@ -27,7 +27,4 @@ define(["dcl/dcl"], function (dcl) {
 			console.log("module:sampleframework/Base1#methodOfBase1 called.");
 		}
 	});
-
-	// Doing return dcl() prevents JSDoc from generating doclets for prototype methods/properties
-	return Base1;
 });

@@ -5,7 +5,7 @@ define(["dcl/dcl"], function (dcl) {
 	 * @class module:sampleframework/PseudoProperties
 	 * @abstract
 	 */
-	var PseudoProperties = dcl(null, /** @lends module:sampleframework/PseudoProperties# */ {
+	return dcl(null, /** @lends module:sampleframework/PseudoProperties# */ {
 		/**
 		 * Doc of pseudo-property store1.
 		 * @member {module:dstore/Store} module:sampleframework/PseudoProperties#store1
@@ -24,7 +24,4 @@ define(["dcl/dcl"], function (dcl) {
 		 * @default null
 		 */
 	});
-
-	// Doing return dcl() prevents JSDoc from generating doclets for prototype methods/properties
-	return PseudoProperties;
 });

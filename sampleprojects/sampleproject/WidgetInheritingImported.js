@@ -10,7 +10,7 @@ define([
 	 * @augments {module:sampleframework/Base0}
 	 * @augments {module:sampleframework/Base1}
 	 */
-	var WidgetInheritingImported = dcl([Base0, Base1], /** @lends module:sampleproject/WidgetInheritingImported# */ {
+	return dcl([Base0, Base1], /** @lends module:sampleproject/WidgetInheritingImported# */ {
 		/**
 		 * Description
 		 * for {@link module:sampleproject/WidgetInheritingImported#createdCallback sampleproject/WidgetInheritingImported#createdCallback}.
@@ -20,7 +20,4 @@ define([
 			console.log("module:sampleproject/WidgetInheritingImported#createdCallback called.");
 		})
 	});
-
-	// Doing return dcl() prevents JSDoc from generating doclets for prototype methods/properties
-	return WidgetInheritingImported;
 });

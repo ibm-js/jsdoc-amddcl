@@ -5,7 +5,7 @@ define(["dcl/dcl"], function (dcl) {
 	 * @class module:sampleframework/AbstractClass
 	 * @abstract
 	 */
-	var AbstractClass = dcl(null, /** @lends module:sampleframework/AbstractClass# */ {
+	return dcl(null, /** @lends module:sampleframework/AbstractClass# */ {
 		/**
 		 * Description of prop1.
 		 * @member {string}
@@ -20,7 +20,4 @@ define(["dcl/dcl"], function (dcl) {
 		method1: function () {
 		}
 	});
-
-	// Doing return dcl() prevents JSDoc from generating doclets for prototype methods/properties
-	return AbstractClass;
 });

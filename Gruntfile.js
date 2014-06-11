@@ -50,4 +50,5 @@ module.exports = function (grunt) {
 			}
 		}
 	});
+	grunt.registerTask("default", ["jsdoc-amddcl"]);
 };

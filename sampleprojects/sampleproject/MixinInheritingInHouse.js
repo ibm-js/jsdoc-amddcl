@@ -11,7 +11,7 @@ define([
 	 * @augments {module:sampleproject/Base0}
 	 * @augments {module:sampleproject/Base1}
 	 */
-	var MixinInheritingInHouse = dcl([Base0, Base1], /** @lends module:sampleproject/MixinInheritingInHouse# */ {
+	return dcl([Base0, Base1], /** @lends module:sampleproject/MixinInheritingInHouse# */ {
 		/**
 		 * Description
 		 * for {@link module:sampleproject/MixinInheritingInHouse#createdCallback sampleproject/MixinInheritingInHouse#createdCallback}.
@@ -21,7 +21,4 @@ define([
 			console.log("module:sampleproject/MixinInheritingInHouse#createdCallback called.");
 		})
 	});
-
-	// Doing return dcl() prevents JSDoc from generating doclets for prototype methods/properties
-	return MixinInheritingInHouse;
 });
