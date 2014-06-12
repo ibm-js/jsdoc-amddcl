@@ -12,6 +12,7 @@
     },
     "plugins": [
         "plugins/markdown",
+        "custom-plugins/augmentmixin",
         "custom-plugins/private",
         "custom-plugins/dedupe",
         "custom-plugins/prepareExport",

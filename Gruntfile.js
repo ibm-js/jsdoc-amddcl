@@ -45,6 +45,19 @@ module.exports = function (grunt) {
 						imports: [
 							"./out/sampleframework"
 						]
+					},
+					{
+						args: [
+							"-X",
+							"-c",
+							"./conf.json"
+						],
+						src: [
+							"./sampleprojects/sampleproject",
+							"./sampleprojects/sampleproject/README.md",
+							"./sampleprojects/sampleproject/package.json"
+						],
+						dest: "./out/sampleproject/doclets.json"
 					}
 				]
 			}
