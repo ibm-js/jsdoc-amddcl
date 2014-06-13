@@ -95,7 +95,7 @@
         <?js }); ?></dl>
     <?js } ?>
 
-    <a href="#" onclick="toggleInherited(event)">Show inherited</a>
+    <a id="toggleinherited" href="#" onclick="toggleInherited(event)">Show inherited</a>
 
     <?js
         var members = self.find({kind: 'member', memberof: title === 'Global' ? {isUndefined: true} : doc.longname});

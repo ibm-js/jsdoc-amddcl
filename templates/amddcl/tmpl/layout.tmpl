@@ -36,6 +36,8 @@
             });
             if (event.type !== "DOMContentLoaded") {
                 event.target.innerHTML = (shouldShow ? "Hide" : "Show") + " inherited";
+            } else if (!document.querySelector("[inherited]")) {
+                document.getElementById("toggleinherited").style.display = "none";
             }
         }
         window.addEventListener("DOMContentLoaded", toggleInherited);
