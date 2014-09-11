@@ -10,8 +10,14 @@ module.exports = function (grunt) {
 			file.dest && grunt.file.mkdir(path.dirname(file.dest));
 		});
 		grunt.util.async.forEach(this.files, function (file, callback) {
+			if (file.paths) {
+				process.env.JSDOC_MODULE_PATHS = JSON.stringify(file.paths);
+			}
 			if (file.imports) {
 				process.env.JSDOC_IMPORT_ROOTS = file.imports.join(path.delimiter);
+			}
+			if (file.packagePathFormat) {
+				process.env.JSDOC_PACKAGE_PATH_FORMAT = file.packagePathFormat;
 			}
 			var args = [
 				JSON.stringify(path.resolve(path.dirname(module.filename), "../node_modules/jsdoc/jsdoc.js")),
@@ -29,6 +35,7 @@ module.exports = function (grunt) {
 			exec(command, function (err, stdout, stderr) {
 				stdout && grunt.log.writeln(stdout);
 				stderr && grunt.log.error(stderr);
+				delete process.env.JSDOC_MODULE_PATHS;
 				delete process.env.JSDOC_IMPORT_ROOTS;
 				if (err) {
 					grunt.log.error(err);

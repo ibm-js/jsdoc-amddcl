@@ -6,7 +6,7 @@ var template = require('jsdoc/template'),
     path = require('jsdoc/path'),
     taffy = require('taffydb').taffy,
     logger = require('jsdoc/util/logger'),
-    helper = require('jsdoc/util/templateHelper'),
+    helper = require('./templateHelper'),
     htmlsafe = helper.htmlsafe,
     linkto = helper.linkto,
     resolveAuthorLinks = helper.resolveAuthorLinks,
@@ -107,20 +107,39 @@ function getPathFromDoclet(doclet) {
         doclet.meta.filename;
 }
 
+function mkdirp(outpath){
+    var elements = outpath.split(path.sep);
+    for (var i = 1, l = elements.length; i < l; ++i) {
+        try {
+            fs.mkdirSync(elements.slice(0, i).join(path.sep));
+        } catch (e) {
+            if (e.code !== 'EEXIST') {
+                throw e;
+            }
+        }
+    }
+}
+
 function generate(title, docs, filename, resolveLinks) {
     resolveLinks = resolveLinks === false ? false : true;
 
+    var level = filename.split('/').length - 1,
+        prefix = level === 0 ? '' :
+            Array.apply(undefined, new Array(level)).map(function () { return '../'; }).join('');
     var docData = {
         title: title,
-        docs: docs
+        docs: docs,
+        prefix: prefix
     };
 
     var outpath = path.join(outdir, filename),
         html = view.render('container.tmpl', docData);
 
     if (resolveLinks) {
-        html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
+        html = helper.resolveLinks(html, prefix); // turn {@link foo} into <a href="foodoc.html">foo</a>
     }
+
+    mkdirp(outpath);
 
     fs.writeFileSync(outpath, html, 'utf8');
 }
@@ -204,7 +223,7 @@ function buildNav(members) {
         nav += '<h3>Modules</h3><ul>';
         members.modules.forEach(function(m) {
             if ( !hasOwnProp.call(seen, m.longname) && !m.imported ) {
-                nav += '<li>'+linkto(m.longname, m.name)+'</li>';
+                nav += '<li>'+linkto(m.longname, m.name, undefined, undefined, '$prefix')+'</li>';
             }
             seen[m.longname] = true;
         });
@@ -216,7 +235,7 @@ function buildNav(members) {
         nav += '<h3>Externals</h3><ul>';
         members.externals.forEach(function(e) {
             if ( !hasOwnProp.call(seen, e.longname) ) {
-                nav += '<li>'+linkto( e.longname, e.name.replace(/(^"|"$)/g, '') )+'</li>';
+                nav += '<li>'+linkto(e.longname, e.name.replace(/(^"|"$)/g, ''), undefined, undefined, '$prefix')+'</li>';
             }
             seen[e.longname] = true;
         });
@@ -229,7 +248,7 @@ function buildNav(members) {
     }).length) {
         members.classes.forEach(function(c) {
             if ( !hasOwnProp.call(seen, c.longname) && !c.imported ) {
-                classNav += '<li>'+linkto(c.longname, c.name)+'</li>';
+                classNav += '<li>'+linkto(c.longname, c.name, undefined, undefined, '$prefix')+'</li>';
             }
             seen[c.longname] = true;
         });
@@ -247,7 +266,7 @@ function buildNav(members) {
         nav += '<h3>Events</h3><ul>';
         members.events.forEach(function(e) {
             if ( !hasOwnProp.call(seen, e.longname) && !e.imported ) {
-                nav += '<li>'+linkto(e.longname, e.name)+'</li>';
+                nav += '<li>'+linkto(e.longname, e.name, undefined, undefined, '$prefix')+'</li>';
             }
             seen[e.longname] = true;
         });
@@ -261,7 +280,7 @@ function buildNav(members) {
         nav += '<h3>Namespaces</h3><ul>';
         members.namespaces.forEach(function(n) {
             if ( !hasOwnProp.call(seen, n.longname) && !n.imported ) {
-                nav += '<li>'+linkto(n.longname, n.name)+'</li>';
+                nav += '<li>'+linkto(n.longname, n.name, undefined, undefined, '$prefix')+'</li>';
             }
             seen[n.longname] = true;
         });
@@ -275,7 +294,7 @@ function buildNav(members) {
         nav += '<h3>Mixins</h3><ul>';
         members.mixins.forEach(function(m) {
             if ( !hasOwnProp.call(seen, m.longname) && !m.imported ) {
-                nav += '<li>'+linkto(m.longname, m.name)+'</li>';
+                nav += '<li>'+linkto(m.longname, m.name, undefined, undefined, '$prefix')+'</li>';
             }
             seen[m.longname] = true;
         });
@@ -396,7 +415,17 @@ exports.publish = function(taffyData, opts, tutorials) {
     // update outdir if necessary, then create outdir
     var packageInfo = ( find({kind: 'package', imported: {'!is': true}}) || [] ) [0];
     if (packageInfo && packageInfo.name) {
-        outdir = path.join(outdir, packageInfo.name, packageInfo.version);
+        if (process.env.JSDOC_PACKAGE_PATH_FORMAT) {
+            var packageData = {
+                name: packageInfo.name,
+                version: packageInfo.version
+            };
+            outdir = path.join(outdir, process.env.JSDOC_PACKAGE_PATH_FORMAT.replace(/\${(\w+)}/g, function (match, token) {
+                return packageData[token];
+            }));
+        } else {
+            outdir = path.join(outdir, packageInfo.name, packageInfo.version);
+        }
     }
     fs.mkPath(outdir);
 
@@ -527,29 +556,50 @@ exports.publish = function(taffyData, opts, tutorials) {
     var externals = taffy(members.externals);
 
     Object.keys(helper.longnameToUrl).forEach(function(longname) {
-        var myClasses = helper.find(classes, {longname: longname});
-        if (myClasses.length) {
-            generate('Class: ' + myClasses[0].name, myClasses, helper.longnameToUrl[longname]);
+        var anotherpath,
+            modulename = (/^module:(.*)$/.exec(longname) || [])[1];
+        if (modulename) {
+            var paths,
+                path = modulename;
+            try {
+                paths = exports.publish.paths = exports.publish.paths || JSON.parse(process.env.JSDOC_MODULE_PATHS);
+            } catch (e) {}
+            for (var namespace in paths) {
+                var parts = modulename.split('/');
+                for (var i = 1; i < parts.length; i++) {
+                    if (parts.slice(0, i).join('/') === namespace) {
+                        anotherpath = true;
+                        break;
+                    }
+                }
+            }
         }
 
-        var myModules = helper.find(modules, {longname: longname});
-        if (myModules.length) {
-            generate('Module: ' + myModules[0].name, myModules, helper.longnameToUrl[longname]);
-        }
+        if (!anotherpath) {
+            var myClasses = helper.find(classes, {longname: longname});
+            if (myClasses.length) {
+                generate('Class: ' + myClasses[0].name, myClasses, helper.longnameToUrl[longname]);
+            }
 
-        var myNamespaces = helper.find(namespaces, {longname: longname});
-        if (myNamespaces.length) {
-            generate('Namespace: ' + myNamespaces[0].name, myNamespaces, helper.longnameToUrl[longname]);
-        }
+            var myModules = helper.find(modules, {longname: longname});
+            if (myModules.length) {
+                generate('Module: ' + myModules[0].name, myModules, helper.longnameToUrl[longname]);
+            }
 
-        var myMixins = helper.find(mixins, {longname: longname});
-        if (myMixins.length) {
-            generate('Mixin: ' + myMixins[0].name, myMixins, helper.longnameToUrl[longname]);
-        }
+            var myNamespaces = helper.find(namespaces, {longname: longname});
+            if (myNamespaces.length) {
+                generate('Namespace: ' + myNamespaces[0].name, myNamespaces, helper.longnameToUrl[longname]);
+            }
 
-        var myExternals = helper.find(externals, {longname: longname});
-        if (myExternals.length) {
-            generate('External: ' + myExternals[0].name, myExternals, helper.longnameToUrl[longname]);
+            var myMixins = helper.find(mixins, {longname: longname});
+            if (myMixins.length) {
+                generate('Mixin: ' + myMixins[0].name, myMixins, helper.longnameToUrl[longname]);
+            }
+
+            var myExternals = helper.find(externals, {longname: longname});
+            if (myExternals.length) {
+                generate('External: ' + myExternals[0].name, myExternals, helper.longnameToUrl[longname]);
+            }
         }
     });
 

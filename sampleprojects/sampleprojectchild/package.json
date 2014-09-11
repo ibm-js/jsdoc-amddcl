@@ -1,0 +1,17 @@
+{
+	"name": "sampleprojectchild",
+	"version": "0.1.0-dev",
+	"dependencies": {
+		"sampleframework": "*",
+		"sampleproject": "*"
+	},
+	"devDependencies": {
+	},
+	"licenses": [
+		{
+			"type": "BSD",
+			"url": "https://github.com/ibm-js/jsdoc-amddcl/blob/master/LICENSE"
+		}
+	],
+	"bugs": "https://github.com/ibm-js/jsdoc-amddcl/issues"
+}

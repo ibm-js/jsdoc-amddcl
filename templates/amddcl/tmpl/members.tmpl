@@ -30,7 +30,7 @@ var self = this;
     <?js if (data.fires && fires.length) { ?>
         <h5>Fires:</h5>
         <ul><?js fires.forEach(function(f) { ?>
-            <li><?js= self.linkto(f) ?></li>
+            <li><?js= self.linkto(f, undefined, undefined, undefined, data.prefix) ?></li>
         <?js }); ?></ul>
     <?js } ?>
 

@@ -34,7 +34,7 @@ if (data.defaultvalue && data.defaultvaluetype === 'object') {
     <?js if (data.inherited && data.inherits) { ?>
     <dt class="inherited-from">Inherited From:</dt>
     <dd class="inherited-from"><ul class="dummy"><li>
-        <?js= this.linkto(data.inherits, this.htmlsafe(data.inherits)) ?>
+        <?js= this.linkto(data.inherits, this.htmlsafe(data.inherits), undefined, undefined, data.prefix) ?>
     </li></dd>
     <?js } ?>
 
@@ -74,7 +74,7 @@ if (data.defaultvalue && data.defaultvaluetype === 'object') {
     <?js if (data.meta && data.kind !== 'module' && self.outputSourceFiles) {?>
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <?js= self.linkto(meta.shortpath) ?>, <?js= self.linkto(meta.shortpath, 'line ' + meta.lineno, null, 'line' + meta.lineno) ?>
+        <?js= self.linkto(meta.shortpath, undefined, undefined, undefined, data.prefix) ?>, <?js= self.linkto(meta.shortpath, 'line ' + meta.lineno, null, 'line' + meta.lineno, data.prefix) ?>
     </li></ul></dd>
     <?js } ?>
 
@@ -91,7 +91,7 @@ if (data.defaultvalue && data.defaultvaluetype === 'object') {
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul><?js see.forEach(function(s) { ?>
-            <li><?js= self.linkto(s) ?></li>
+            <li><?js= self.linkto(s, undefined, undefined, undefined, data.prefix) ?></li>
         <?js }); ?></ul>
     </dd>
     <?js } ?>
