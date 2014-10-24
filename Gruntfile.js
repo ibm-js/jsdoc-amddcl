@@ -86,7 +86,8 @@ module.exports = function (grunt) {
 						imports: [
 							"./out/sampleproject"
 						],
-						packagePathFormat: "${name}/docs/api/${version}"
+						packagePathFormat: "${name}/docs/api/${version}",
+						includeEventsInTOC: "false"
 					},
 					{
 						args: [

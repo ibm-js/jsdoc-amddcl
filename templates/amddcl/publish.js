@@ -260,18 +260,21 @@ function buildNav(members) {
         }
     }
 
-    if (members.events.filter(function(e) {
-        return !hasOwnProp.call(seen, e.longname) && !e.imported;
-    }).length) {
-        nav += '<h3>Events</h3><ul>';
-        members.events.forEach(function(e) {
-            if ( !hasOwnProp.call(seen, e.longname) && !e.imported ) {
-                nav += '<li>'+linkto(e.longname, e.name, undefined, undefined, '$prefix')+'</li>';
-            }
-            seen[e.longname] = true;
-        });
 
-        nav += '</ul>';
+    if (process.env.INCLUDE_EVENTS_IN_TOC !== 'false') {
+        if (members.events.filter(function(e) {
+            return !hasOwnProp.call(seen, e.longname) && !e.imported;
+        }).length) {
+            nav += '<h3>Events</h3><ul>';
+            members.events.forEach(function(e) {
+                if ( !hasOwnProp.call(seen, e.longname) && !e.imported ) {
+                    nav += '<li>'+linkto(e.longname, e.name, undefined, undefined, '$prefix')+'</li>';
+                }
+                seen[e.longname] = true;
+            });
+
+            nav += '</ul>';
+        }
     }
 
     if (members.namespaces.filter(function(n) {

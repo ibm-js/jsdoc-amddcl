@@ -19,6 +19,9 @@ module.exports = function (grunt) {
 			if (file.packagePathFormat) {
 				process.env.JSDOC_PACKAGE_PATH_FORMAT = file.packagePathFormat;
 			}
+			if (file.includeEventsInTOC) {
+				process.env.INCLUDE_EVENTS_IN_TOC = file.includeEventsInTOC;
+			}
 			var args = [
 				JSON.stringify(path.resolve(path.dirname(module.filename), "../node_modules/jsdoc/jsdoc.js")),
 				"-c",

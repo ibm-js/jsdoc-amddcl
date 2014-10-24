@@ -1,6 +1,14 @@
 /** @module sampleframework/Base0 */
 define(["dcl/dcl"], function (dcl) {
 	/**
+	 * Foo event. Dispached in some conditions.
+	 * @event module:sampleframework/Base0#event-foo
+	 * @property {number} value1 - First value.
+	 * @property {number} value2- Second value.
+	 */
+	
+	
+	/**
 	 * A sample base widget class.
 	 * @class module:sampleframework/Base0
 	 */
@@ -38,6 +46,14 @@ define(["dcl/dcl"], function (dcl) {
 		 */
 		methodOfBase0: function () {
 			console.log("module:sampleframework/Base0#methodOfBase0 called.");
+		},
+		
+		/**
+		 * Description of emitFooEvent.
+		 * @fires module:sampleframework/Base0#event-foo
+		 */
+		emitFooEvent: function () {
+			// Some code that emits the event-foo event.
 		}
 	});
 	
