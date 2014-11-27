@@ -6,6 +6,9 @@
 		"taffydb": "https://github.com/hegemonic/taffydb/tarball/master",
 		"catharsis": "~0.7.1"
 	},
+	"scripts": {
+		"postinstall": "node installPrettify.js"
+	},
 	"devDependencies": {
 		"grunt": "~0.4.0"
 	},
