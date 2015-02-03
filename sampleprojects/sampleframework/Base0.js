@@ -54,6 +54,15 @@ define(["dcl/dcl"], function (dcl) {
 		 */
 		emitFooEvent: function () {
 			// Some code that emits the event-foo event.
+		},
+		
+		/**
+		 * A method to test param and returns.
+		 * @param {module:sampleframework/Base1} param Takes a sampleframework/Base1 instance.
+		 * @returns {module:sampleframework/Base1} An instance of sampleframework/Base1.
+		 */
+		methodWithParamAndReturns: function (param) {
+			console.log("module:sampleframework/Base0#methodOfBaseCommon called.");
 		}
 	});
 	
