@@ -62,7 +62,6 @@ define(["dcl/dcl"], function (dcl) {
 		 * @returns {module:sampleframework/Base1} An instance of sampleframework/Base1.
 		 */
 		methodWithParamAndReturns: function (param) {
-			console.log("module:sampleframework/Base0#methodOfBaseCommon called.");
 		}
 	});
 	
