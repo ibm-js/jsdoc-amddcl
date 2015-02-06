@@ -61,7 +61,7 @@ define(["dcl/dcl"], function (dcl) {
 		 * @param {module:sampleframework/Base1} param Takes a sampleframework/Base1 instance.
 		 * @returns {module:sampleframework/Base1} An instance of sampleframework/Base1.
 		 */
-		methodWithParamAndReturns: function (param) {
+		methodWithParamAndReturns: function () {
 		}
 	});
 	
