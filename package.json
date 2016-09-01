@@ -3,7 +3,7 @@
 	"version": "0.1.0-dev",
 	"dependencies": {
 		"jsdoc": "https://github.com/jsdoc3/jsdoc/archive/v3.3.0-alpha7.tar.gz",
-		"taffydb-jsdoc": "https://github.com/hegemonic/taffydb/tarball/master",
+		"taffydb-jsdoc": "2.6.2",
 		"catharsis": "~0.7.1"
 	},
 	"scripts": {
