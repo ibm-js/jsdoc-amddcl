@@ -4,7 +4,7 @@
 var template = require('jsdoc/template'),
     fs = require('jsdoc/fs'),
     path = require('jsdoc/path'),
-    taffy = require('taffydb').taffy,
+    taffy = require('taffydb-jsdoc').taffy,
     logger = require('jsdoc/util/logger'),
     helper = require('./templateHelper'),
     htmlsafe = helper.htmlsafe,
