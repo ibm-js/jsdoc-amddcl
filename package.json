@@ -2,7 +2,7 @@
 	"name": "jsdoc-amddcl",
 	"version": "0.1.0-dev",
 	"dependencies": {
-		"jsdoc": "~3.5.0",
+		"jsdoc": "~3.4.0",
 		"taffydb-jsdoc": "2.6.2",
 		"catharsis": "~0.7.1"
 	},
